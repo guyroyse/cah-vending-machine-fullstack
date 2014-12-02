@@ -10,14 +10,4 @@ class GoogleHomePage extends Page {
 		title == "Google"
 	}
 
-	static content = {
-		searchField(wait: true) { $('input[name="q"]') }
-		searchButton(wait: true) { $('input[name="btnK"]') }
-	}
-
-	def searchFor(query) {
-		this.searchField.value(query)
-		this.searchButton.click()
-	}
-
 }
