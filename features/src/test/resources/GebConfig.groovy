@@ -34,7 +34,7 @@ environments {
 
 }
 
-baseUrl = "https://www.google.com/"
+baseUrl = "http://localhost:8000/"
 
 baseNavigatorWaiting = true
 
