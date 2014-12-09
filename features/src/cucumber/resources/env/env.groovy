@@ -29,8 +29,6 @@ Before() { scenario ->
 
 After() { scenario ->
 
-	js.exec('localStorage.clear();')
-
 	bindingUpdater.remove()
 
 	// embed screenshot into cucumber report

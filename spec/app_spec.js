@@ -1,33 +1,52 @@
-describe("Application", function() {
+describe("Vending Machine", function() {
 
-  beforeEach(function() {
-    setFixtures('<div id="awesome"></div>');
-  });
+  describe("Model", function() {
 
-  when("made awesome", function() {
+    var subject;
 
     beforeEach(function() {
-      App.makeAwesome();
+      subject = new VendingMachine.Model();
     });
 
-    it("is awesome", function() {
-      expect(App.awesome()).toBe(true);
+    it("displays INSERT COIN when created", function() {
+      expect(subject.display()).toBe("INSERT COIN");
     });
 
-    it("contains awesomeness", function() {
-      expect($('#awesome')).toContainText("Awesome App is Awesome");
+    it("has any empty coin return when created", function() {
+      expect(subject.coinReturn().length).toBe(0);
     });
 
   });
 
-  when("not made awesome", function() {
+  describe("View", function() {
 
-    it("is not awesome", function() {
-      expect(App.awesome()).toBe(false);
+    var subject;
+
+    beforeEach(function() {
+      setFixtures(
+        '<div>' +
+          '<div id="display"></div>' +
+          '<ul id="coinReturn"></ul>' +
+        '</div>');
+      subject = new VendingMachine.View();
     });
 
-    it("does not contain awesomeness", function() {
-      expect($('#awesome')).not.toContainText("Awesome App is Awesome");
+    it("updates the display", function () {
+      subject.setDisplay("foo");
+      expect($('#display')).toContainText("foo");
+    });
+
+    it("places coins in coin return", function() {
+      
+      var coins = ["foo", "bar", "baz"];
+      subject.setCoinReturn(coins);
+
+      var coinReturn = $("#coinReturn > li")
+      expect(coinReturn.length).toBe(3);
+      expect(coinReturn[0]).toContainText("foo");
+      expect(coinReturn[1]).toContainText("bar");
+      expect(coinReturn[2]).toContainText("baz");
+
     });
 
   });
